@@ -12,7 +12,6 @@ public class UI_AchievementNotification : MonoBehaviour
     private float _fadeOutDuration = 2f;
 
     private CanvasGroup _canvasGroup;
-
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
