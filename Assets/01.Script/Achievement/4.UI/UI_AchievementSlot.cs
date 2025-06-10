@@ -1,9 +1,9 @@
+using Gpm.Ui;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class UI_AchievementSlot : MonoBehaviour
+public class UI_AchievementSlot : InfiniteScrollItem
 {
     public TextMeshProUGUI NameTextUI;
     public TextMeshProUGUI DescriptionTextUI;
