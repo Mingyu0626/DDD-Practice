@@ -8,7 +8,11 @@ public class AchievementManager : MonoBehaviour
 
 
     [SerializeField]
+    private AchievementSOList _achievementSOList;
+
     private List<AchievementSO> _metaDatas;
+    private int _metaDataCount => _metaDatas?.Count ?? 0;
+    public int MetaDataCount => _metaDataCount;
 
     private List<Achievement> _achievements;
     public List<AchievementDTO> Achievements => _achievements.ConvertAll((a) => new AchievementDTO(a));
@@ -37,6 +41,7 @@ public class AchievementManager : MonoBehaviour
     {
         _achievements = new List<Achievement>();
         _repository = new AchievementRepository();
+        _metaDatas = _achievementSOList.Achievements;
 
         List<AchievementSaveData> saveDatas = _repository.Load();
         foreach (var metaData in _metaDatas)
@@ -97,4 +102,6 @@ public class AchievementManager : MonoBehaviour
         }
         return false;
     }
+
+
 }
