@@ -13,6 +13,14 @@ public class AchievementDTO
     public readonly int CurrentValue;
     public readonly bool RewardClaimed;
 
+
+    public AchievementDTO(string id, int currentValue, bool rewardClaimed)
+    {
+        ID = id;
+        CurrentValue = currentValue;
+        RewardClaimed = rewardClaimed;
+    }
+
     public AchievementDTO(Achievement achievement)
     {
         ID = achievement.ID;
