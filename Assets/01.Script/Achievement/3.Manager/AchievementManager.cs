@@ -52,7 +52,23 @@ public class AchievementManager : MonoBehaviour
                 achievement.Increase(value);
             }
         }
-
         OnDataChanged?.Invoke();
+    }
+
+    public bool TryClaimReward(AchievementDTO achievementDto)
+    {
+        Achievement achievement = _achievements.Find(a => a.ID == achievementDto.ID);
+        if (achievement == null)
+        {
+            return false;
+        }
+
+        if (achievement.TryClaimReward())
+        {
+            CurrencyManager.Instance.Add(achievement.RewardCurrencyType, achievement.RewardAmount);
+            OnDataChanged?.Invoke();
+            return true;
+        }
+        return false;
     }
 }

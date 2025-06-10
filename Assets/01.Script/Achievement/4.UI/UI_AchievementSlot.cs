@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class UI_AchievementSlot : MonoBehaviour
@@ -12,14 +13,32 @@ public class UI_AchievementSlot : MonoBehaviour
     public TextMeshProUGUI RewardClaimDate;
     public Button RewardClaimButton;
 
-    public void Refresh(AchievementDTO achievement)
+    private AchievementDTO _achivementDTO;
+
+    public void Refresh(AchievementDTO achievementDTO)
     {
-        NameTextUI.text = achievement.Name;
-        DescriptionTextUI.text = achievement.Description;
-        RewardCountTextUI.text = achievement.RewardAmount.ToString();
-        ProgressSlider.value = (float)achievement.CurrentValue / achievement.GoalValue;
-        ProgressTextUI.text = $"{achievement.CurrentValue} / {achievement.GoalValue}";
-        
+        _achivementDTO = achievementDTO;
+        NameTextUI.text = achievementDTO.Name;
+        DescriptionTextUI.text = achievementDTO.Description;
+        RewardCountTextUI.text = achievementDTO.RewardAmount.ToString();
+        ProgressSlider.value = (float)achievementDTO.CurrentValue / achievementDTO.GoalValue;
+        ProgressTextUI.text = $"{achievementDTO.CurrentValue} / {achievementDTO.GoalValue}";
+
+        RewardClaimButton.interactable = achievementDTO.CanClaimReward();
+        RewardClaimButton.image.color = achievementDTO.CanClaimReward() ? Color.red : Color.white;
+
         // 등등....
+    }
+
+    public void ClaimReward()
+    {
+        if (AchievementManager.Instance.TryClaimReward(_achivementDTO))
+        {
+            // 꽃가루 뿌려주고
+        }
+        else
+        {
+            // 진행도가 부족합니다...
+        }
     }
 }
