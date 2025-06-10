@@ -11,7 +11,7 @@ public class AchievementManager : MonoBehaviour
     private List<AchievementSO> _metaDatas;
     
     private List<Achievement> _achievements;
-    public List<Achievement> Achievements => _achievements;
+    public List<AchievementDTO> Achievements => _achievements.ConvertAll((a) => new AchievementDTO(a));
 
     public event Action OnDataChanged;
     

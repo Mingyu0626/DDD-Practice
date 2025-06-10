@@ -12,7 +12,7 @@ public class UI_AchievementSlot : MonoBehaviour
     public TextMeshProUGUI RewardClaimDate;
     public Button RewardClaimButton;
 
-    public void Refresh(Achievement achievement)
+    public void Refresh(AchievementDTO achievement)
     {
         NameTextUI.text = achievement.Name;
         DescriptionTextUI.text = achievement.Description;
