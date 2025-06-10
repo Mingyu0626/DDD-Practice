@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 406472950}
   - component: {fileID: 406472949}
   - component: {fileID: 406472948}
+  - component: {fileID: 406472951}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -401,6 +402,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406472946}
   m_CullTransparentMesh: 1
+--- !u!114 &406472951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406472946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10837ee7ec97f6d48b4db00e8ee75cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onChangeValue:
+    m_PersistentCalls:
+      m_Calls: []
+  onChangeActiveItem:
+    m_PersistentCalls:
+      m_Calls: []
+  onStartLine:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndLine:
+    m_PersistentCalls:
+      m_Calls: []
+  needItemCount: 0
+  itemPrefab: {fileID: 1878749259356675089, guid: 71f8f82c3df2a2249ae724ea65e41a84,
+    type: 3}
+  dynamicItemSize: 0
+  layout:
+    axis: 1
+    padding: {x: 0, y: 0}
+    space: {x: 0, y: 0}
+    topToBotton: 1
+    leftToRight: 1
+    values: []
+  padding: 0
+  space: 0
 --- !u!4 &475488566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5963937743390997973, guid: 7042f8fe21debc944b5bdc894f478d63,
@@ -500,6 +538,7 @@ MonoBehaviour:
   _achievementSlotUIPrefab: {fileID: 6353664010577117833, guid: 71f8f82c3df2a2249ae724ea65e41a84,
     type: 3}
   _verticalLayoutGroup: {fileID: 1648469118}
+  _infiniteScroll: {fileID: 406472951}
 --- !u!1001 &567189782
 PrefabInstance:
   m_ObjectHideFlags: 0

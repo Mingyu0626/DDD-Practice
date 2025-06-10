@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 
 [Serializable]
 public class AchievementDTO
@@ -32,6 +33,28 @@ public class AchievementDTO
         RewardAmount = achievement.RewardAmount;
         CurrentValue = achievement.CurrentValue;
         RewardClaimed = achievement.RewardClaimed;
+    }
+
+    public AchievementDTO(
+        string id,
+        string name,
+        string description,
+        EAchievementCondition condition,
+        int goalValue,
+        ECurrencyType rewardCurrencyType,
+        int rewardAmount,
+        int currentValue,
+        bool rewardClaimed)
+    {
+        ID = id;
+        Name = name;
+        Description = description;
+        Condition = condition;
+        GoalValue = goalValue;
+        RewardCurrencyType = rewardCurrencyType;
+        RewardAmount = rewardAmount;
+        CurrentValue = currentValue;
+        RewardClaimed = rewardClaimed;
     }
 
     // 상태를 변경하는 메서드가 아닌, 상태를 조회하는 메서드정도는 DTO에 들어가도 된다.

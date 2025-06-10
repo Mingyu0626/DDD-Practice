@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Gpm.Ui;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +12,15 @@ public class UI_Achievement : MonoBehaviour
     [SerializeField]
     private VerticalLayoutGroup _verticalLayoutGroup;
 
+    [SerializeField]
+    private InfiniteScroll _infiniteScroll;
+    private List<UI_AchievementSlotData> _achievementSlotData;
+
     private void Start()
     {
-        ClearSlot();
-        InitSlot();
+        _achievementSlotData = new List<UI_AchievementSlotData>();
+        //ClearSlot();
+        //InitSlot();
         Refresh();
         AchievementManager.Instance.OnDataChanged += Refresh;
         gameObject.SetActive(false);
@@ -26,7 +32,14 @@ public class UI_Achievement : MonoBehaviour
 
         for (int i = 0; i < achievements.Count; i++)
         {
-            _slots[i].Refresh(achievements[i]);
+            if (_achievementSlotData.Count <= i)
+            {
+                _achievementSlotData.Add(new UI_AchievementSlotData(achievements[i]));
+                _infiniteScroll.InsertData(_achievementSlotData.Last());
+            }
+            _achievementSlotData[i].CurrentValue = achievements[i].CurrentValue;
+            _achievementSlotData[i].RewardClaimed = achievements[i].RewardClaimed;
+            _infiniteScroll.UpdateData(_achievementSlotData[i]);
         }
     }
 
