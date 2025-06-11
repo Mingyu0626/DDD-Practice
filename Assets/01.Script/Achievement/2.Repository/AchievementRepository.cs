@@ -22,6 +22,8 @@ public class AchievementRepository
         PlayerPrefs.SetString(SAVE_KEY, json);
     }
 
+    // 원래 FM대로는 DTO를 넘겨주는게 맞지만..
+    // 이정도 유도리는 있어도 된다고 생각
     public List<AchievementSaveData> Load()
     {
         if (!PlayerPrefs.HasKey(SAVE_KEY))
