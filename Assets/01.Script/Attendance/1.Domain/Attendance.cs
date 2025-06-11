@@ -41,6 +41,7 @@ public class Attendance
 
     public bool CanGetReward(int day)
     {
+        return false;
     }
     public AttendanceDTO ToDTO()
     {
