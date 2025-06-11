@@ -32,7 +32,7 @@ public class AttendanceManager : MonoBehaviour
 
 
 
-    private string _email => AccountManager.Instance.CurrentAccount.Email;
+    private string _email => AccountManager.Instance?.CurrentAccount.Email ?? "myEmail";
 
 
     private void Awake()
@@ -134,7 +134,6 @@ public class AttendanceManager : MonoBehaviour
             if (attendance.CanClaimReward(_attendanceCount))
             {
                 Events.AttendanceRewardClaimButtonActivateEvent.IsActive = true;
-                
                 return;
             }
         }

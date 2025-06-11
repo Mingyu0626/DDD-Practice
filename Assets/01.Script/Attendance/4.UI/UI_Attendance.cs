@@ -39,7 +39,7 @@ public class UI_Attendance : MonoBehaviour
 
     public void OnClickClaimRewardButton()
     {
-        //AttendanceManager.Instance.TryGetReward();
+        AttendanceManager.Instance.ClaimReward();
     }
 
     private void RefreshAttendanceSlots(AttendanceRefreshEvent evt)
