@@ -510,6 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5889840871273519047}
   - component: {fileID: 3589552826628984570}
+  - component: {fileID: 5447488656961681245}
   m_Layer: 5
   m_Name: UI_StreakAttendanceSlot
   m_TagString: Untagged
@@ -564,6 +565,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5447488656961681245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307502693732932412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87109a7966509ac479cbbd9995d306c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alreadyGetIcon: {fileID: 3324939914708850875}
+  _canGetIcon: {fileID: 6476828367171298715}
+  _dayText: {fileID: 6310979573669640658}
+  _amountText: {fileID: 52246874468174126}
 --- !u!1 &9013559523954077350
 GameObject:
   m_ObjectHideFlags: 0

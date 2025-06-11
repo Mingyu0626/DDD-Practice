@@ -24,28 +24,34 @@ public class UI_Attendance : MonoBehaviour
 
     private void Init()
     {
-        for(int i=0; i<_slots.Count; ++i)
+        foreach (var slot in _slots)
         {
-            _slots[i].InitData(AttendanceManager.Instance.GetRewardData(i));
+            //slot.Refresh(AttendanceManager.Instance.Attendances);
         }
-        for (int i = 0; i < _streakSlots.Count; ++i)
+        foreach(var slot in _streakSlots)
         {
-            _slots[i].InitData(AttendanceManager.Instance.GetRewardData(i)); // 나중에 streak용으로 수정
+            //slot.Refresh(AttendanceManager.Instance.StreakAttendances);
         }
     }
 
     public void OnClickClaimRewardButton()
     {
-        AttendanceManager.Instance.TryGetReward();
+        //AttendanceManager.Instance.TryGetReward();
     }
 
     private void RefreshAttendanceSlots(AttendanceRefreshEvent evt)
     {
-        
+        foreach(var slot in _slots)
+        {
+            slot.Refresh(evt.Attendance);
+        }
     }
 
     private void RefreshStreakAttendanceSlots(StreakAttendanceRefreshEvent evt)
     {
-
+        foreach(var slot in _streakSlots)
+        {
+            slot.Refresh(evt.StreakAttendance);
+        }
     }
 }

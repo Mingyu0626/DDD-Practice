@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 2206040711316303174}
   - component: {fileID: 3753025561952202494}
   - component: {fileID: 5189581448749299790}
+  - component: {fileID: 9067635010973260834}
   m_Layer: 5
   m_Name: UI_NormalAttendanceSlot
   m_TagString: Untagged
@@ -369,6 +370,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9067635010973260834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173874844932794230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87109a7966509ac479cbbd9995d306c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alreadyGetIcon: {fileID: 4430550038981166955}
+  _canGetIcon: {fileID: 9018892972203430892}
+  _dayText: {fileID: 2455028371247071131}
+  _amountText: {fileID: 5588397555737524057}
 --- !u!1 &9018892972203430892
 GameObject:
   m_ObjectHideFlags: 0

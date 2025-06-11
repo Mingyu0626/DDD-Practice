@@ -68,14 +68,11 @@ namespace Unity.FPS.Game
 
     public class AttendanceRefreshEvent : GameEvent
     {
-        public int TotalAttendanceCount;
-        public int ClaimRewardCount;
+        public Attendance Attendance;
     }
 
     public class StreakAttendanceRefreshEvent : GameEvent
     {
-        public int CurrentStreakCount;
-        public int MaxStreakCount;
-        public int ClaimStreakRewardCount;
+        public StreakAttendance StreakAttendance;
     }
 }
