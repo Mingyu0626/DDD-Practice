@@ -14,10 +14,17 @@ public class AccountDTO
         Nickname = nickname;
         Password = password;
     }
+
     public AccountDTO(Account account)
     {
         Email = account.Email;
         Nickname = account.Nickname;
         Password = account.Password;
+    }
+    public AccountDTO(AccountSaveData accountSaveData)
+    {
+        Email = accountSaveData.Email;
+        Nickname = accountSaveData.Nickname;
+        Password = accountSaveData.Password;
     }
 }
