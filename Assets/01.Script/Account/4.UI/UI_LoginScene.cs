@@ -41,8 +41,7 @@ public class UI_LoginScene : MonoBehaviour
         RegisterPanel.SetActive(false);
         LoginInputFields.ResultText.text = string.Empty;
         RegisterInputFields.ResultText.text = string.Empty;
-
-        LoginCheck();
+        // LoginCheck();
     }
 
     // 회원가입하기 버튼 클릭
@@ -67,55 +66,85 @@ public class UI_LoginScene : MonoBehaviour
         if (!emailSpecification.IsSatisfiedBy(email))
         {
             RegisterInputFields.ResultText.text = emailSpecification.ErrorMessage;
+            Debug.Log(emailSpecification.ErrorMessage);
             return;
         }
 
 
         string nickname = RegisterInputFields.NicknameInputField.text;
+        var nicknameSpecification = new AccountNicknameSpecification();
+        if (!nicknameSpecification.IsSatisfiedBy(nickname))
+        {
+            RegisterInputFields.ResultText.text = nicknameSpecification.ErrorMessage;
+            Debug.Log(nicknameSpecification.ErrorMessage);
+            return;
+        }
 
         string password1 = RegisterInputFields.PasswordInputField.text;
+        var passwordSpecification = new AccountPasswordSpecification();
+        if (!passwordSpecification.IsSatisfiedBy(password1))
+        {
+            RegisterInputFields.ResultText.text = passwordSpecification.ErrorMessage;
+            Debug.Log(passwordSpecification.ErrorMessage);
+            return;
+        }
 
         string password2 = RegisterInputFields.PasswordComfirmInputField.text;
-
-        if (AccountManager.Instance.TryRegister(email, nickname, password1, password2))
+        if (!passwordSpecification.IsSatisfiedBy(password2))
         {
+            RegisterInputFields.ResultText.text = passwordSpecification.ErrorMessage;
+            Debug.Log(passwordSpecification.ErrorMessage);
+            return;
+        }
 
+        if (password1 != password2)
+        {
+            RegisterInputFields.ResultText.text = "비밀번호가 일치하지 않습니다.";
+            Debug.Log("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
+        Result result = AccountManager.Instance.TryRegister(email, nickname, password1);
+        if (result.IsSuccess)
+        {
             // 5. 로그인 창으로 돌아간다.
             // (이때 아이디는 자동 입력되어 있다.)
             OnClickGoToLoginButton();
         }
-    }
-
-    public string Encryption(string text)
-    {
-        // 해시 암호화 알고리즘 인스턴스를 생성한다.
-        SHA256 sha256 = SHA256.Create();
-
-        // 운영체제 혹은 프로그래밍 언어별로 string 표현하는 방식이 다 다르므로
-        // UTF8 버전 바이트로 배열로 바꿔야한다.
-        byte[] bytes = Encoding.UTF8.GetBytes(text);
-        byte[] hash = sha256.ComputeHash(bytes);
-
-        string resultText = string.Empty;
-        foreach (byte b in hash)
+        else
         {
-            // byte를 다시 string으로 바꿔서 이어붙이기
-            resultText += b.ToString("X2");
+            RegisterInputFields.ResultText.text = result.Message;
         }
-
-        return resultText;
     }
-
 
     public void Login()
     {
         string email = LoginInputFields.IDInputField.text;
+        var emailSpecification = new AccountEmailSpecification();
+        if (!emailSpecification.IsSatisfiedBy(email))
+        {
+            LoginInputFields.ResultText.text = emailSpecification.ErrorMessage;
+            Debug.Log(emailSpecification.ErrorMessage);
+            return;
+        }
+
         string password = LoginInputFields.PasswordInputField.text;
+        var passwordSpecification = new AccountPasswordSpecification();
+        if (!passwordSpecification.IsSatisfiedBy(password))
+        {
+            LoginInputFields.ResultText.text = passwordSpecification.ErrorMessage;
+            Debug.Log(passwordSpecification.ErrorMessage);
+            return;
+        }
 
         if (AccountManager.Instance.TryLogin(email, password))
         {
             Debug.Log("로그인 성공!");
             SceneManager.LoadScene(1);
+        }
+        else
+        {
+            LoginInputFields.ResultText.text = "이메일 또는 비밀번호가 일치하지 않습니다.";
         }
     }
 

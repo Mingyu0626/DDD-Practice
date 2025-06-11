@@ -10,7 +10,7 @@ public class AccountNicknameSpecification : ISpecification<string>
 
     // 금지된 닉네임 (비속어 등)
     private static readonly string[] ForbiddenNicknames = 
-        { "바보", "멍청이", "운영자", "김홍일" };
+        { "바보", "멍청이", "운영자", "최민규" };
 
     public string ErrorMessage { get; private set; }
 

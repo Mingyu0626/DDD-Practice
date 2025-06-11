@@ -20,7 +20,7 @@ public class AccountRepository
         {
             return null;
         }
-        string json = PlayerPrefs.GetString(SAVE_PREFIX);
+        string json = PlayerPrefs.GetString(SAVE_PREFIX + email);
         return JsonUtility.FromJson<AccountSaveData>(json);
     }
 }

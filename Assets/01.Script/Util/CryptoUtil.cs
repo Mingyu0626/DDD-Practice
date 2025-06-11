@@ -25,7 +25,6 @@ public class CryptoUtil
 
     public static bool Verify(string plainText, string hashedText, string salt = "")
     {
-        // 입력된 평문을 해시화하고, 결과가 저장된 해시와 일치하는지 확인한다.
         return Encryption(plainText, salt) == hashedText;
     }
 }

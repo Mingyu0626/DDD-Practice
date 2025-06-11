@@ -15,6 +15,7 @@ public class AccountPasswordSpecification : ISpecification<string>
 
         if (value.Length < 6 || 12 < value.Length)
         {
+            Debug.Log($"비밀번호 길이 오류: {value.Length}자");
             ErrorMessage = "비밀번호는 6자 이상 12자 이하이어야 합니다.";
             return false;
         }
