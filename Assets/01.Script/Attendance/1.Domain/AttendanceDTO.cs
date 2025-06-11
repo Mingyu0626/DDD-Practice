@@ -1,20 +1,8 @@
 using System;
 using UnityEngine;
 
-public class AttendanceRepository
-{
-    public void Save(string email, AttendanceDTO attendanceDto)
-    {
-
-    }
-
-    public AttendanceDTO Load(string email)
-    {
-
-    }
-}
-
-public class AttendanceSaveData
+[Serializable]
+public class AttendanceDTO
 {
     public string Email; // 이메일
     public int TotalAttendanceCount; // 누적 출석 일수
@@ -24,7 +12,7 @@ public class AttendanceSaveData
     public int ClaimRewardCount; // 획득한 일반 보상 수
     public int ClaimStreakRewardCount; // 획득한 연속 보상 수
 
-    public AttendanceSaveData(Attendance attendance)
+    public AttendanceDTO(Attendance attendance)
     {
         Email = attendance.Email;
         TotalAttendanceCount = attendance.TotalAttendanceCount;
@@ -33,5 +21,16 @@ public class AttendanceSaveData
         MaxStreakCount = attendance.MaxStreakCount;
         ClaimRewardCount = attendance.ClaimRewardCount;
         ClaimStreakRewardCount = attendance.ClaimStreakRewardCount;
+    }
+
+    public AttendanceDTO(AttendanceSaveData attendanceSaveData)
+    {
+        Email = attendanceSaveData.Email;
+        TotalAttendanceCount = attendanceSaveData.TotalAttendanceCount;
+        LastAttendanceDate = attendanceSaveData.LastAttendanceDate;
+        CurrentStreakCount = attendanceSaveData.CurrentStreakCount;
+        MaxStreakCount = attendanceSaveData.MaxStreakCount;
+        ClaimRewardCount = attendanceSaveData.ClaimRewardCount;
+        ClaimStreakRewardCount = attendanceSaveData.ClaimStreakRewardCount;
     }
 }
