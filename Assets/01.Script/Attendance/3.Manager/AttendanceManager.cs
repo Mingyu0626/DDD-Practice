@@ -6,11 +6,13 @@ public class AttendanceManager : MonoBehaviour
     public static AttendanceManager Instance;
     [SerializeField]
     private AttendanceRewardSOList _attendanceRewardList; // 일반 보상 리스트
-    [SerializeField]
-    private StreakAttendanceRewardSOList _streakAttendanceRewardList; // 연속 보상 리스트
 
-
+    private Attendance _attendance;
     private AttendanceRepository _attendanceRepository;
+
+
+
+    private string _email => AccountManager.Instance.CurrentAccount.Email;
 
     public event Action OnDateChanged;
 
@@ -32,20 +34,7 @@ public class AttendanceManager : MonoBehaviour
     private void Init()
     {
         _attendanceRepository = new AttendanceRepository();
-    }
-
-    private void CheckDay()
-    {
 
     }
 
-    public bool TryGetReward()
-    {
-        return false;
-    }
-
-    public AttendanceRewardSO GetRewardData(int day)
-    {
-        return _attendanceRewardList.Attendances.Find(reward => reward.RewardDay == day);
-    }
 }

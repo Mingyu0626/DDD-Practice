@@ -4,33 +4,32 @@ using UnityEngine;
 [Serializable]
 public class AttendanceDTO
 {
-    public string Email; // 이메일
-    public int TotalAttendanceCount; // 누적 출석 일수
-    public DateTime LastAttendanceDate; // 마지막 출석 날짜
-    public int CurrentStreakCount; // 연속 출석 카운트
-    public int MaxStreakCount; // 최대 연속 출석 카운트
-    public int ClaimRewardCount; // 획득한 일반 보상 수
-    public int ClaimStreakRewardCount; // 획득한 연속 보상 수
+    public readonly string ID;
+    public readonly int RewardDay;
+    public readonly ECurrencyType CurrencyType;
+    public readonly int RewardAmount;
+    public readonly bool RewardClaimed;
+
+    public AttendanceDTO(string id, int rewardDay, ECurrencyType currencyType, int rewardAmount, bool rewardClaimed)
+    {
+        ID = id;
+        RewardDay = rewardDay;
+        CurrencyType = currencyType;
+        RewardAmount = rewardAmount;
+        RewardClaimed = rewardClaimed;
+    }
 
     public AttendanceDTO(Attendance attendance)
     {
-        Email = attendance.Email;
-        TotalAttendanceCount = attendance.TotalAttendanceCount;
-        LastAttendanceDate = attendance.LastAttendanceDate;
-        CurrentStreakCount = attendance.CurrentStreakCount;
-        MaxStreakCount = attendance.MaxStreakCount;
-        ClaimRewardCount = attendance.ClaimRewardCount;
-        ClaimStreakRewardCount = attendance.ClaimStreakRewardCount;
+        ID = attendance.ID;
+        RewardDay = attendance.RewardDay;
+        CurrencyType = attendance.CurrencyType;
+        RewardAmount = attendance.RewardAmount;
+        RewardClaimed = attendance.RewardClaimed;
     }
 
-    public AttendanceDTO(AttendanceSaveData attendanceSaveData)
+    public bool CanClaimReward()
     {
-        Email = attendanceSaveData.Email;
-        TotalAttendanceCount = attendanceSaveData.TotalAttendanceCount;
-        LastAttendanceDate = attendanceSaveData.LastAttendanceDate;
-        CurrentStreakCount = attendanceSaveData.CurrentStreakCount;
-        MaxStreakCount = attendanceSaveData.MaxStreakCount;
-        ClaimRewardCount = attendanceSaveData.ClaimRewardCount;
-        ClaimStreakRewardCount = attendanceSaveData.ClaimStreakRewardCount;
+        return !RewardClaimed;
     }
 }
