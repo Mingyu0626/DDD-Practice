@@ -23,15 +23,21 @@ public class Attendance
         _rewardClaimed = saveData.RewardClaimed;
     }
 
-    public Attendance(AttendanceDTO attendanceDto)
-    {
-
-    }
-
     public virtual bool CanClaimReward(int day)
     {
         return !_rewardClaimed && RewardDay <= day;
     }
+
+    public virtual bool TryClaimReward(int day)
+    {
+        if (CanClaimReward(day))
+        {
+            _rewardClaimed = true;
+            return true;
+        }
+        return false;
+    }
+
     public AttendanceDTO ToDTO()
     {
         return new AttendanceDTO(this);
