@@ -118,6 +118,8 @@ public class AttendanceManager : MonoBehaviour
         {
             _currentStreakAttendanceCount = 1;
         }
+
+        _attendanceRepository.Save(_email, Attendances, StreakAttendances);
     }
 
     // 출석 했을 때, 받을 수 있는 애들이 있으면 받기 버튼 활성화
@@ -165,6 +167,8 @@ public class AttendanceManager : MonoBehaviour
                 EventManager.Broadcast(Events.StreakAttendanceRefreshEvent);
             }
         }
+
+        _attendanceRepository.Save(_email, Attendances, StreakAttendances);
     }
 
 
