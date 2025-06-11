@@ -1,11 +1,18 @@
+using System;
 using UnityEngine;
 
 public class AttendanceManager : MonoBehaviour
 {
     public static AttendanceManager Instance;
-    public readonly AttendanceRewardSOList AttendanceRewardList; // 일반 보상 리스트
-    public readonly StreakAttendanceRewardSOList StreakAttendanceRewardList; // 연속 보상 리스트
+    [SerializeField]
+    private AttendanceRewardSOList _attendanceRewardList; // 일반 보상 리스트
+    [SerializeField]
+    private StreakAttendanceRewardSOList _streakAttendanceRewardList; // 연속 보상 리스트
+
+
     private AttendanceRepository _attendanceRepository;
+
+    public event Action OnDateChanged;
 
     private void Awake()
     {
@@ -27,13 +34,18 @@ public class AttendanceManager : MonoBehaviour
         _attendanceRepository = new AttendanceRepository();
     }
 
-    public bool TryGetReward()
+    private void CheckDay()
     {
 
     }
 
+    public bool TryGetReward()
+    {
+        return false;
+    }
+
     public AttendanceRewardSO GetRewardData(int day)
     {
-
+        return _attendanceRewardList.Attendances.Find(reward => reward.RewardDay == day);
     }
 }

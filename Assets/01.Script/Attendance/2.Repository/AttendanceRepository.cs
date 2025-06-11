@@ -3,14 +3,22 @@ using UnityEngine;
 
 public class AttendanceRepository
 {
+    private const string SAVE_PREFIX = "ATTENDANCE_";
     public void Save(string email, AttendanceDTO attendanceDto)
     {
-
+        AttendanceSaveData attendanceSaveData = new AttendanceSaveData(attendanceDto);
+        string json = JsonUtility.ToJson(attendanceSaveData);
+        PlayerPrefs.SetString(SAVE_PREFIX + email, json);
     }
 
     public AttendanceDTO Load(string email)
     {
-
+        if (!PlayerPrefs.HasKey(SAVE_PREFIX + email))
+        {
+            return null;
+        }
+        string json = PlayerPrefs.GetString(SAVE_PREFIX + email);
+        return JsonUtility.FromJson<AttendanceDTO>(json);
     }
 }
 
@@ -24,14 +32,14 @@ public class AttendanceSaveData
     public int ClaimRewardCount; // È¹µæÇÑ ÀÏ¹Ý º¸»ó ¼ö
     public int ClaimStreakRewardCount; // È¹µæÇÑ ¿¬¼Ó º¸»ó ¼ö
 
-    public AttendanceSaveData(Attendance attendance)
+    public AttendanceSaveData(AttendanceDTO attendanceDto)
     {
-        Email = attendance.Email;
-        TotalAttendanceCount = attendance.TotalAttendanceCount;
-        LastAttendanceDate = attendance.LastAttendanceDate;
-        CurrentStreakCount = attendance.CurrentStreakCount;
-        MaxStreakCount = attendance.MaxStreakCount;
-        ClaimRewardCount = attendance.ClaimRewardCount;
-        ClaimStreakRewardCount = attendance.ClaimStreakRewardCount;
+        Email = attendanceDto.Email;
+        TotalAttendanceCount = attendanceDto.TotalAttendanceCount;
+        LastAttendanceDate = attendanceDto.LastAttendanceDate;
+        CurrentStreakCount = attendanceDto.CurrentStreakCount;
+        MaxStreakCount = attendanceDto.MaxStreakCount;
+        ClaimRewardCount = attendanceDto.ClaimRewardCount;
+        ClaimStreakRewardCount = attendanceDto.ClaimStreakRewardCount;
     }
 }
