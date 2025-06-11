@@ -18,6 +18,7 @@ namespace Unity.FPS.Game
         public static DisplayMessageEvent DisplayMessageEvent = new DisplayMessageEvent();
         public static AttendanceRefreshEvent AttendanceRefreshEvent = new AttendanceRefreshEvent();
         public static StreakAttendanceRefreshEvent StreakAttendanceRefreshEvent = new StreakAttendanceRefreshEvent();
+        public static AttendanceRewardClaimButtonActivateEvent AttendanceRewardClaimButtonActivateEvent = new AttendanceRewardClaimButtonActivateEvent();
     }
 
     public class ObjectiveUpdateEvent : GameEvent
@@ -74,5 +75,10 @@ namespace Unity.FPS.Game
     public class StreakAttendanceRefreshEvent : GameEvent
     {
         public StreakAttendance StreakAttendance;
+    }
+
+    public class AttendanceRewardClaimButtonActivateEvent : GameEvent
+    {
+        public bool IsActive;
     }
 }

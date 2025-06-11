@@ -8,6 +8,11 @@ public class AttendanceSaveData
     public string ID;
     public bool RewardClaimed;
 
+    public AttendanceSaveData()
+    {
+        ID = string.Empty;
+        RewardClaimed = false;
+    }
     public AttendanceSaveData(Attendance attendance)
     {
         ID = attendance.ID;
