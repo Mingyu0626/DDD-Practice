@@ -8,10 +8,13 @@ public class AttendanceManager : MonoBehaviour
     public static AttendanceManager Instance;
     [SerializeField]
     private AttendanceRewardSOList _attendanceRewardList; // 일반 보상 리스트
-
     private List<AttendanceRewardSO> _metaDatas;
-    private int _metaDataCount => _metaDatas?.Count ?? 0;
-    public int MetaDataCount => _metaDataCount;
+
+    [SerializeField]
+    private AttendanceRewardSOList _streakAttendanceRewardList; // 연속 보상 리스트
+    private List<AttendanceRewardSO> _metaDatasStreak;
+
+
 
     private List<Attendance> _attendances;
     public List<AttendanceDTO> Attendances => _attendances.ConvertAll((a) => new AttendanceDTO(a));
@@ -51,6 +54,7 @@ public class AttendanceManager : MonoBehaviour
     {
         _attendanceRepository = new AttendanceRepository();
         _metaDatas = _attendanceRewardList.Attendances;
+        _metaDatasStreak = _streakAttendanceRewardList.Attendances;
 
         (List<AttendanceSaveData>, List<AttendanceSaveData>) attendanceSaveDataTuple = _attendanceRepository.Load(_email);
 
@@ -79,7 +83,7 @@ public class AttendanceManager : MonoBehaviour
         // 연속 출석 리스트
         streakAttendances = new List<StreakAttendance>();
         List<AttendanceSaveData> streakSaveDatas = attendanceSaveDataTuple.Item2;
-        foreach (var metaData in _metaDatas)
+        foreach (var metaData in _metaDatasStreak)
         {
             // 중복 검사
             StreakAttendance duplicatedStreakAttendance = streakAttendances.Find(a => a.ID == metaData.ID);
