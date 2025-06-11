@@ -16,6 +16,8 @@ namespace Unity.FPS.Game
         public static AmmoPickupEvent AmmoPickupEvent = new AmmoPickupEvent();
         public static DamageEvent DamageEvent = new DamageEvent();
         public static DisplayMessageEvent DisplayMessageEvent = new DisplayMessageEvent();
+        public static AttendanceRefreshEvent AttendanceRefreshEvent = new AttendanceRefreshEvent();
+        public static StreakAttendanceRefreshEvent StreakAttendanceRefreshEvent = new StreakAttendanceRefreshEvent();
     }
 
     public class ObjectiveUpdateEvent : GameEvent
@@ -62,5 +64,18 @@ namespace Unity.FPS.Game
     {
         public string Message;
         public float DelayBeforeDisplay;
+    }
+
+    public class AttendanceRefreshEvent : GameEvent
+    {
+        public int TotalAttendanceCount;
+        public int ClaimRewardCount;
+    }
+
+    public class StreakAttendanceRefreshEvent : GameEvent
+    {
+        public int CurrentStreakCount;
+        public int MaxStreakCount;
+        public int ClaimStreakRewardCount;
     }
 }

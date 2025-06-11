@@ -7,8 +7,6 @@ public class AttendanceManager : MonoBehaviour
     public readonly StreakAttendanceRewardSOList StreakAttendanceRewardList; // 연속 보상 리스트
     private AttendanceRepository _attendanceRepository;
 
-
-
     private void Awake()
     {
         if (Instance == null)
@@ -23,6 +21,7 @@ public class AttendanceManager : MonoBehaviour
 
         Init();
     }
+
     private void Init()
     {
         _attendanceRepository = new AttendanceRepository();
@@ -37,7 +36,4 @@ public class AttendanceManager : MonoBehaviour
     {
 
     }
-
-
-
 }
