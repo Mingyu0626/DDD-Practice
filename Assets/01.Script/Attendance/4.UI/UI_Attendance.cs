@@ -1,16 +1,26 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Attendance : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private List<UI_AttendanceSlot> _slots;
+    [SerializeField]
+    private GameObject _attendacneSlotUIPrefab;
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Init()
     {
-        
+        foreach (var slot in _slots)
+        {
+            slot.
+        }
     }
+
 }
