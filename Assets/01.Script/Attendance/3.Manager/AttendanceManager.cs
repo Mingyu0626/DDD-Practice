@@ -122,7 +122,7 @@ public class AttendanceManager : MonoBehaviour
         {
             _currentStreakAttendanceCount = 1;
         }
-
+        _attendanceCount++;
         _attendanceRepository.Save(_email, Attendances, StreakAttendances);
     }
 
