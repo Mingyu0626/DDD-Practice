@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class AttendanceDTO
+public class DailyAttendanceDTO
 {
     public readonly string ID;
     public readonly int RewardDay;
@@ -10,7 +10,16 @@ public class AttendanceDTO
     public readonly int RewardAmount;
     public readonly bool RewardClaimed;
 
-    public AttendanceDTO(string id, int rewardDay, ECurrencyType currencyType, int rewardAmount, bool rewardClaimed)
+    public DailyAttendanceDTO()
+    {
+        ID = string.Empty;
+        RewardDay = 100;
+        CurrencyType = ECurrencyType.Gold; // 기본값 설정
+        RewardAmount = 0;
+        RewardClaimed = false;
+    }
+
+    public DailyAttendanceDTO(string id, int rewardDay, ECurrencyType currencyType, int rewardAmount, bool rewardClaimed)
     {
         ID = id;
         RewardDay = rewardDay;
@@ -19,7 +28,7 @@ public class AttendanceDTO
         RewardClaimed = rewardClaimed;
     }
 
-    public AttendanceDTO(Attendance attendance)
+    public DailyAttendanceDTO(Attendance attendance)
     {
         ID = attendance.ID;
         RewardDay = attendance.RewardDay;

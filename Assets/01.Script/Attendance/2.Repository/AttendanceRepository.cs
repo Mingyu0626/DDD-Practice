@@ -5,31 +5,29 @@ using UnityEngine;
 public class AttendanceRepository
 {
     private const string SAVE_PREFIX = "ATTENDANCE_";
-    private const string SAVE_STREAKPREFIX = "STREAK_ATTENDANCE_";
 
-    public void Save(string email, List<AttendanceDTO> attendanceList, List<AttendanceDTO> streakAttendanceList)
+    // SaveData 하나로 DailyAttendances, StreakAttendances, AttendanceInfo 모두 저장
+    public void Save(string email,
+        List<DailyAttendanceDTO> dailyAttendanceList,
+        List<DailyAttendanceDTO> streakAttendanceList,
+        AttendanceHistory history)
     {
-        AttendanceSaveDataList attendanceSaveDataList = new AttendanceSaveDataList(attendanceList);
-        string json = JsonUtility.ToJson(attendanceSaveDataList);
+        AttendanceSaveData saveData = new AttendanceSaveData(dailyAttendanceList, streakAttendanceList, history);
+        string json = JsonUtility.ToJson(saveData);
         PlayerPrefs.SetString(SAVE_PREFIX + email, json);
-
-        AttendanceSaveDataList streakAttendanceSaveDataList = new AttendanceSaveDataList(streakAttendanceList);
-        string json2 = JsonUtility.ToJson(streakAttendanceSaveDataList);
-        PlayerPrefs.SetString(SAVE_STREAKPREFIX + email, json2);
     }
 
-    public (List<AttendanceSaveData>, List<AttendanceSaveData>) Load(string email)
+    // Load 시 AttendanceSaveData 통째로 받아서 내부 리스트 반환
+    public (List<DailyAttendanceSaveData> dailyAttendances, List<DailyAttendanceSaveData> streakAttendances, AttendanceHistory history) Load(string email)
     {
-        if (!PlayerPrefs.HasKey(SAVE_PREFIX + email) || !PlayerPrefs.HasKey(SAVE_STREAKPREFIX + email))
+        if (!PlayerPrefs.HasKey(SAVE_PREFIX + email))
         {
-            return (null, null);
+            return (null, null, default);
         }
+
         string json = PlayerPrefs.GetString(SAVE_PREFIX + email);
-        AttendanceSaveDataList attendanceSaveDataList = JsonUtility.FromJson<AttendanceSaveDataList>(json);
+        AttendanceSaveData saveData = JsonUtility.FromJson<AttendanceSaveData>(json);
 
-        string json2 = PlayerPrefs.GetString(SAVE_STREAKPREFIX + email);
-        AttendanceSaveDataList streakAttendanceSaveDataList = JsonUtility.FromJson<AttendanceSaveDataList>(json2);
-
-        return (attendanceSaveDataList.DataList, streakAttendanceSaveDataList.DataList);
+        return (saveData.DailyAttendances, saveData.StreakAttendances, saveData.AttendanceInfo);
     }
 }

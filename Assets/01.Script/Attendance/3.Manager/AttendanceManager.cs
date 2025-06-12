@@ -17,10 +17,10 @@ public class AttendanceManager : MonoBehaviour
 
 
     private List<Attendance> _attendances;
-    public List<AttendanceDTO> Attendances => _attendances.ConvertAll((a) => new AttendanceDTO(a));
+    public List<DailyAttendanceDTO> Attendances => _attendances.ConvertAll((a) => new DailyAttendanceDTO(a));
 
     private List<StreakAttendance> streakAttendances;
-    public List<AttendanceDTO> StreakAttendances => streakAttendances.ConvertAll((a) => new AttendanceDTO(a));
+    public List<DailyAttendanceDTO> StreakAttendances => streakAttendances.ConvertAll((a) => new DailyAttendanceDTO(a));
 
 
     private AttendanceRepository _attendanceRepository;
@@ -56,11 +56,11 @@ public class AttendanceManager : MonoBehaviour
         _metaDatas = _attendanceRewardList.Attendances;
         _metaDatasStreak = _streakAttendanceRewardList.Attendances;
 
-        (List<AttendanceSaveData>, List<AttendanceSaveData>) attendanceSaveDataTuple = _attendanceRepository.Load(_email);
+        (List<DailyAttendanceSaveData>, List<DailyAttendanceSaveData>) attendanceSaveDataTuple = _attendanceRepository.Load(_email);
 
         // 일반 출석 리스트
         _attendances = new List<Attendance>();
-        List<AttendanceSaveData> saveDatas = attendanceSaveDataTuple.Item1;
+        List<DailyAttendanceSaveData> saveDatas = attendanceSaveDataTuple.Item1;
         foreach (var metaData in _metaDatas)
         {
             // 중복 검사
@@ -70,8 +70,8 @@ public class AttendanceManager : MonoBehaviour
                 throw new Exception($"출석 ID({metaData.ID})가 중복됩니다.");
             }
 
-            AttendanceSaveData saveData = 
-                saveDatas?.Find(a => a.ID == metaData.ID) ?? new AttendanceSaveData();
+            DailyAttendanceSaveData saveData = 
+                saveDatas?.Find(a => a.ID == metaData.ID) ?? new DailyAttendanceSaveData();
             Attendance attendance = new Attendance(metaData, saveData);
             _attendances.Add(attendance);
 
@@ -82,7 +82,7 @@ public class AttendanceManager : MonoBehaviour
 
         // 연속 출석 리스트
         streakAttendances = new List<StreakAttendance>();
-        List<AttendanceSaveData> streakSaveDatas = attendanceSaveDataTuple.Item2;
+        List<DailyAttendanceSaveData> streakSaveDatas = attendanceSaveDataTuple.Item2;
         foreach (var metaData in _metaDatasStreak)
         {
             // 중복 검사
@@ -92,8 +92,8 @@ public class AttendanceManager : MonoBehaviour
                 throw new Exception($"연속 출석 ID({metaData.ID})가 중복됩니다.");
             }
 
-            AttendanceSaveData saveData = 
-                streakSaveDatas?.Find(a => a.ID == metaData.ID) ?? new AttendanceSaveData();
+            DailyAttendanceSaveData saveData = 
+                streakSaveDatas?.Find(a => a.ID == metaData.ID) ?? new DailyAttendanceSaveData();
             StreakAttendance streakAttendance = new StreakAttendance(metaData, saveData);
             streakAttendances.Add(streakAttendance);
 

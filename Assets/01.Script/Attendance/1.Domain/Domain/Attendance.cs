@@ -13,7 +13,7 @@ public class Attendance
     public bool RewardClaimed => _rewardClaimed;
     
 
-    public Attendance(AttendanceRewardSO  metaData, AttendanceSaveData saveData)
+    public Attendance(AttendanceRewardSO  metaData, DailyAttendanceSaveData saveData)
     {
         ID = metaData.ID;
         RewardDay = metaData.RewardDay;
@@ -38,8 +38,8 @@ public class Attendance
         return false;
     }
 
-    public AttendanceDTO ToDTO()
+    public DailyAttendanceDTO ToDTO()
     {
-        return new AttendanceDTO(this);
+        return new DailyAttendanceDTO(this);
     }
 }

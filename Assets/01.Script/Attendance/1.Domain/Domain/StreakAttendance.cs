@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StreakAttendance : Attendance
 {
-    public StreakAttendance(AttendanceRewardSO metaData, AttendanceSaveData saveData) : base(metaData, saveData)
+    public StreakAttendance(AttendanceRewardSO metaData, DailyAttendanceSaveData saveData) : base(metaData, saveData)
     {
     }
 
